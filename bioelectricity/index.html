@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bioelectricity | Muneeb Shahzad</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E⚡%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6DFCB;--ink:#2E333D;--soft:#444B58;--terra:#A9482F;--card:#FFFBF5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 30%,#FFF7EC 0%,#F6DFCB 75%) fixed,#F6DFCB;color:var(--ink);font-family:'Fredoka',ui-rounded,'Trebuchet MS',system-ui,sans-serif;line-height:1.6}
+#c{position:fixed;inset:0;width:100%;height:100%;z-index:0;touch-action:pan-y;cursor:grab}
+.back,.hint{position:fixed;z-index:6;background:var(--card);color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:6px 16px;font-size:.9rem}
+.back{top:calc(env(safe-area-inset-top,0px) + 12px);left:14px;text-decoration:none}
+.hint{top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;font-size:.85rem;pointer-events:none;transition:opacity .8s;max-width:60vw}
+main{position:relative;z-index:1;pointer-events:none}
+.step{min-height:100vh;display:flex;align-items:center;padding:70px 5vw}
+.step.r{justify-content:flex-end}
+.card{pointer-events:auto;max-width:420px;background:var(--card);border:2px solid var(--ink);border-radius:38px 20px 42px 20px;padding:22px 24px;box-shadow:6px 6px 0 rgba(169,72,47,.28);opacity:0;transform:translateY(34px) rotate(1deg);transition:opacity .7s,transform .7s}
+.card.in{opacity:1;transform:none}
+.card.hero{background:linear-gradient(90deg,rgba(255,247,236,.96),rgba(255,247,236,.75) 70%,rgba(255,247,236,0));border:0;box-shadow:none;padding:20px 28px 20px 8px;max-width:620px}
+h1{font-size:clamp(3.4rem,14vw,8rem);line-height:.95;margin:0 0 10px;font-weight:600;letter-spacing:-.02em;color:var(--terra)}
+h2{font-size:1.6rem;line-height:1.15;margin:0 0 8px;font-weight:600;color:var(--ink)}
+p{margin:0 0 10px;color:var(--soft)}
+.tag{font-family:'Caveat',cursive;font-size:1.4rem;color:var(--terra)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.chip{border:1.5px solid var(--terra);border-radius:999px;padding:2px 12px;font-size:.88rem;background:rgba(169,72,47,.1);color:var(--ink)}
+.oops{border-left:5px solid var(--terra);padding-left:12px;margin-top:12px}
+.tiles{display:grid;gap:12px;margin-top:8px}
+.tile{border:1.5px solid var(--ink);border-radius:24px 14px 26px 14px;padding:10px 16px;background:rgba(169,72,47,.09)}
+.tile b{display:block;font-size:2.1rem;line-height:1.1;color:var(--terra)}
+.tile span{font-size:.92rem;color:var(--soft)}
+a.lnk{color:var(--terra);font-weight:500}
+.lab{position:fixed;left:0;top:0;z-index:4;max-width:170px;text-align:center;font-size:.82rem;line-height:1.25;background:#FFFBF5;color:#2E333D;border:1.5px solid #2E333D;border-radius:10px;padding:2px 8px;pointer-events:none;opacity:0;will-change:transform}
+.lab::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:12px;background:#2E333D}
+.lab.ing{border:2px solid var(--terra);background:#FFE3CC;font-weight:500}
+.tip{position:fixed;left:0;top:0;z-index:7;max-width:240px;background:#FFFBF5;color:var(--ink);border:1.5px solid var(--terra);border-radius:14px;padding:8px 12px;font-size:.85rem;line-height:1.35;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:3px 3px 0 rgba(169,72,47,.25)}
+.tip b{display:block;color:var(--terra);font-size:.95rem}
+:focus-visible{outline:3px solid var(--terra);outline-offset:3px;border-radius:8px}
+@media (max-width:760px){.step,.step.r{justify-content:center;align-items:flex-end;padding-bottom:7vh}.card{max-width:100%}.lab.minor{display:none}.hint{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);right:auto;left:50%;transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.card{transition:none;transform:none}}
+.ctl{position:fixed;top:calc(env(safe-area-inset-top,0px) + 56px);left:14px;z-index:6;background:var(--card);border:1.5px solid var(--ink);border-radius:18px;padding:10px 14px;font-size:.85rem;opacity:0;pointer-events:none;transition:opacity .4s}.ctl.on{opacity:1;pointer-events:auto}.ctl label{display:block}.ctl input[type=range]{width:150px;accent-color:#A9482F}.ctl .cb{margin-top:6px}.lg{height:8px;border-radius:6px;margin-top:8px;background:linear-gradient(90deg,#2E333D,#B55E45,#FFC759)}.lgt{display:flex;justify-content:space-between;font-size:.72rem;color:var(--soft)}
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">Muneeb's site</a>
+<div class="hint" id="hint">Drag to rotate. Hover or tap any part.</div>
+<div class="tip" id="tip"></div>
+<div class="ctl" id="ctl"><label>Gap junction coupling<br><input id="cp" type="range" min="0" max="2" step=".05" value=".8"></label><label class="cb"><input id="kb" type="checkbox"> Block K&#8314; channels</label><div class="lg"></div><div class="lgt"><span>polarized</span><span>depolarized</span></div></div>
+<canvas id="c" aria-label="Interactive 3D sheet of cells colored by membrane voltage. Tap a cell to depolarize it, change gap junction coupling, wound the sheet and block potassium channels."></canvas>
+<main>
+<section class="step"><div class="card hero in"><h1>Bioelectricity</h1><p>Cells hold a voltage across their membranes and share it with their neighbors. After my regeneration analysis flagged the gap junction gene Gja1 (connexin 43), I simulated how a wound might change those voltages. Scroll, then touch the tissue.</p><span class="tag">simulation project</span></div></section>
+
+<section class="step r"><div class="card"><span class="tag">a voltage per cell</span><h2>Vmem: the resting voltage</h2><p>Every cell keeps a resting membrane voltage, Vmem, set by ion channels and pumps. Color shows Vmem across this sheet of cells: dark is polarized, orange is depolarized. Tap any cell to depolarize it.</p></div></section>
+
+<section class="step"><div class="card"><span class="tag">gap junctions</span><h2>Neighbors share voltage</h2><p>Gap junctions, built from connexins such as Cx43 (the Gja1 gene), are tiny pores joining neighboring cells. A voltage change spreads through them. Tap a cell, which holds it depolarized for a moment, then drag the coupling slider: stronger coupling carries the voltage farther.</p></div></section>
+
+<section class="step r"><div class="card"><span class="tag">a wound</span><h2>Break the sheet</h2><p>A wound removes cells and disturbs the ones at its edge, so the voltage landscape changes there. The question my simulation asks: does that change reshape Vmem enough to cue regeneration?</p></div></section>
+
+<section class="step"><div class="card"><span class="tag">channels</span><h2>Block the potassium channels</h2><p>Potassium channels help hold the resting voltage. Block them and cells depolarize. This was one of my simulated conditions, alongside a baseline run. Try the toggle.</p></div></section>
+
+<section class="step r"><div class="card"><span class="tag">what the simulations showed</span><h2>An honest null result</h2><p>I ran three experiments in BETSE, a bioelectric tissue simulation engine. Under default parameters, none produced a significant shift in Vmem after wounding. I report that as a methodological finding rather than a positive result.</p></div></section>
+
+<section class="step"><div class="card"><span class="tag">the honest part</span><h2>What this page is and is not</h2><p>The tissue on this page is a simplified teaching model I wrote for the web, not the BETSE output. My actual simulation runs are in the repository.</p><p><a class="lnk" href="https://github.com/muneeb-dotcom/bioelectric-sim" target="_blank" rel="noopener">Simulation runs on GitHub</a></p></div></section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+
+(function(){
+var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.num').forEach(count)}})},{threshold:.3});
+document.querySelectorAll('.card').forEach(function(c){io.observe(c)});
+function count(n){if(n.dataset.done)return;n.dataset.done=1;var to=+n.dataset.to,d=+n.dataset.dec,s=performance.now();(function f(now){var p=rm?1:Math.min(1,(now-s)/1400);n.textContent=(to*(1-Math.pow(1-p,3))).toFixed(d);if(p<1)requestAnimationFrame(f)})(s)}
+var T=window.THREE,cv=document.getElementById('c'),ren;
+addEventListener('error',function(e){if(/ResizeObserver|Script error/.test(e.message))return;window.__err=1;var h=document.getElementById('hint');h.textContent='3D error: '+e.message;h.style.opacity=1});try{ren=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true})}catch(e){cv.style.display='none';var h0=document.getElementById('hint');h0.textContent='3D could not start here ('+e.message+')';h0.style.opacity=1;window.__err=1;return}
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+var sc=new T.Scene(),cam=new T.PerspectiveCamera(45,1,.1,100),i,k;
+sc.add(new T.AmbientLight(0xFFF1E0,.35));sc.add(new T.HemisphereLight(0xFFF6EA,0x8A5A48,.4));
+var dl=new T.DirectionalLight(0xFFF0DD,.9);dl.position.set(-3,6,7);sc.add(dl);var dl2=new T.DirectionalLight(0xFFE0C4,.35);dl2.position.set(5,3,6);sc.add(dl2);
+var pl=new T.PointLight(0xE8A76B,1.3,18);pl.position.set(3,2,5);sc.add(pl);var rim=new T.PointLight(0xB35E46,1.1,16);rim.position.set(-4,-2,-4);sc.add(rim);
+var dpa=new Float32Array(960);for(i=0;i<960;i++)dpa[i]=(Math.random()-.5)*18;var dgm=new T.BufferGeometry();dgm.setAttribute('position',new T.BufferAttribute(dpa,3));var dust=new T.Points(dgm,new T.PointsMaterial({color:0xE8C9B0,size:.035,transparent:true,opacity:.35}));
+var W=new T.Group();sc.add(W);
+function M(c,o){o=o==null?1:o;return new T.MeshStandardMaterial({color:c,roughness:.6,transparent:o<1,opacity:o})}
+function sg(t,a,b){return Math.min(1,Math.max(0,(t-a)/(b-a)))}function ez(x){return x*x*(3-2*x)}function R(a,b){return a+Math.random()*(b-a)}
+function V(x,y,z){return new T.Vector3(x,y,z)}
+var prio=[],back=[];
+function tag(o,n,d,arr){o.traverse(function(m){if(m.isMesh){m.userData.info=[n,d];(arr||prio).push(m)}})}
+/* ---------- procedural tissue textures (tileable, pure pixel math) ---------- */
+function Hh(i,j,s){var h=Math.imul(i|0,374761393)+Math.imul(j|0,668265263)+Math.imul((s|0)+1,1274126177);h=Math.imul(h^(h>>>13),1274126177);h^=h>>>16;return (h>>>0)/4294967296}
+function vn(x,y,P,s){var xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf),x0=((xi%P)+P)%P,y0=((yi%P)+P)%P,x1=(x0+1)%P,y1=(y0+1)%P,a=Hh(x0,y0,s),b=Hh(x1,y0,s),c=Hh(x0,y1,s),d=Hh(x1,y1,s);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v}
+function fbm(u,v,o,P,s){var a=0,w=.5,f=P,k;for(k=0;k<o;k++){a+=w*vn(u*f,v*f,f,s+k);f*=2;w*=.5}return a/(1-Math.pow(.5,o))*.5+ .0}
+function vor(u,v,N,s){var x=u*N,y=v*N,xi=Math.floor(x),yi=Math.floor(y),d1=9,d2=9,id=0,a,b;for(a=-1;a<=1;a++)for(b=-1;b<=1;b++){var cx=xi+a,cy=yi+b,hx=((cx%N)+N)%N,hy=((cy%N)+N)%N,px=cx+Hh(hx,hy,s)*.8+.1,py=cy+Hh(hx,hy,s+9)*.8+.1,d=Math.sqrt((px-x)*(px-x)+(py-y)*(py-y));if(d<d1){d2=d1;d1=d;id=Hh(hx,hy,s+3)}else if(d<d2)d2=d}return [d1,d2,id]}
+function sst(a,b,x){var t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t)}
+function mx3(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t]}
+function sc3(c,k,h){return [c[0]*k,c[1]*k,c[2]*k,h]}
+var TX={
+skin:function(u,v){var w=fbm(u,v,3,4,1)*2,f1=Math.abs(Math.sin(Math.PI*(u*6+v*4+w*1.2))),f2=Math.abs(Math.sin(Math.PI*(u*4-v*6+w*1.2+.3))),f3=Math.abs(Math.sin(Math.PI*(u*14+v*9+w*2))),f4=Math.abs(Math.sin(Math.PI*(u*9-v*14+w*2+.5))),fur=Math.max(Math.pow(1-f1,16),Math.pow(1-f2,16),.45*Math.max(Math.pow(1-f3,22),Math.pow(1-f4,22))),g=fbm(u,v,4,8,5)*2,pr=vor(u,v,14,7),pore=(pr[2]>.55&&pr[0]<.1)?1-pr[0]/.1:0,h=1-fur*.8+(g-.5)*.35-pore*.8,c=mx3([112,62,52],[190,130,104],sst(.05,.95,h)),bl=fbm(u,v,2,3,9)*2;c[0]+=bl*22;c[1]-=bl*6;return sc3(c,.82+.18*h,h)},
+epi:function(u,v){var c=vor(u,v,16,2),ed=1-sst(0,.1,c[1]-c[0]),nu=sst(.2,.12,c[0]),g=fbm(u,v,3,6,4)*2,b=mx3([214,128,126],[190,96,108],c[2]);b=mx3(b,[104,46,92],nu*.85);b=mx3(b,[138,62,82],ed*.7);return sc3(b,.82+.3*g,1-ed*.6)},
+basal:function(u,v){var c=vor(u,v,34,5),ed=1-sst(0,.08,c[1]-c[0]),nu=sst(.34,.18,c[0]),b=mx3([160,74,92],[60,22,66],nu);b=mx3(b,[110,44,66],ed*.6);return sc3(b,1,1-ed*.5)},
+derm:function(u,v,S){var w=fbm(u,v,3,4,2)*2,w2=fbm(u,v,3,8,6)*2,f1=sst(.55,.92,Math.abs(Math.sin(Math.PI*(v*S+w*2.6)))),f2=.6*sst(.6,.94,Math.abs(Math.sin(Math.PI*(u*S*.8+v*S*.5+w2*2)))),f3=.55*sst(.72,.95,Math.abs(Math.sin(Math.PI*(v*S*3+w*3+u*S*.4)))),f=Math.max(f1,f2,f3),gr=fbm(u,v,4,24,8)*2,c=mx3([176,76,88],[232,150,148],f*.85);return sc3(c,.8+.35*gr,f)},
+fat:function(u,v){var c=vor(u,v,8,3),ed=1-sst(0,.07,c[1]-c[0]),t=sst(0,.5,c[0]),b=mx3([252,228,150],[232,186,92],t);b=mx3(b,[188,112,64],ed);return sc3(b,.92+.1*fbm(u,v,3,8,2),1-ed*.7)},
+cyto:function(u,v){var g=fbm(u,v,5,16,3)*2,d=vor(u,v,26,7),dot=sst(.07,.03,d[0]),c=mx3([222,160,136],[170,96,104],dot*.8);return sc3(c,(.78+.4*g)*(.85+.3*fbm(u,v,3,48,9)*2),g-dot*.4)},
+chrom:function(u,v){var g=fbm(u,v,5,8,11)*2,cl=sst(.42,.68,g),sp=fbm(u,v,3,32,4)*2,c=mx3([156,104,168],[58,28,80],cl);return sc3(c,.85+.3*sp,g)},
+mito:function(u,v){var s=Math.abs(Math.sin(Math.PI*(u*10+fbm(u,v,2,4,5)*3))),cr=sst(.45,.9,s),c=mx3([178,54,44],[104,20,26],cr*.85);return sc3(c,.9+.2*fbm(u,v,3,8,2)*2,1-cr*.5)},
+er:function(u,v){var d=vor(u,v,22,4),r=sst(.09,.04,d[0]),g=fbm(u,v,3,8,6)*2,c=mx3([196,88,72],[96,40,52],r);return sc3(c,.85+.25*g,1-r*.5)},
+mem:function(u,v){var g=fbm(u,v,4,10,7)*2;return sc3([226,150,128],(.8+.4*g)*(.85+.3*fbm(u,v,3,48,5)*2),g)}
+};
+
+function mkTex(w,fn,a1){var c=document.createElement('canvas'),c2=document.createElement('canvas');c.width=c.height=c2.width=c2.height=w;var x=c.getContext('2d'),x2=c2.getContext('2d'),im=x.createImageData(w,w),im2=x2.createImageData(w,w),i,j,k,r,h;for(j=0;j<w;j++)for(i=0;i<w;i++){r=fn(i/w,j/w,a1);k=(j*w+i)*4;im.data[k]=r[0];im.data[k+1]=r[1];im.data[k+2]=r[2];im.data[k+3]=255;h=Math.max(0,Math.min(255,r[3]*255));im2.data[k]=im2.data[k+1]=im2.data[k+2]=h;im2.data[k+3]=255}x.putImageData(im,0,0);x2.putImageData(im2,0,0);var t1=new T.CanvasTexture(c),t2=new T.CanvasTexture(c2);[t1,t2].forEach(function(t){t.wrapS=t.wrapT=T.RepeatWrapping;t.anisotropy=4});return [t1,t2]}
+function TM(p,o,rep,bs){var a=p[0].clone(),b=p[1].clone();a.needsUpdate=b.needsUpdate=true;a.repeat.set(rep,rep);b.repeat.set(rep,rep);return new T.MeshStandardMaterial({color:0xFFFFFF,map:a,bumpMap:b,bumpScale:bs,roughness:.62,transparent:o<1,opacity:o})}
+
+var labs=[],vv=V(0,0,0);
+function LB(txt,g,p,a,b,cls){var e=document.createElement('div');e.className='lab '+(cls||'');e.textContent=txt;document.body.appendChild(e);labs.push({e:e,g:g,p:p,a:a,b:b})}
+function grp(){var g=new T.Group();W.add(g);return g}
+function vis(g,s){g.scale.setScalar(Math.max(s,.0001));g.visible=s>.01}
+var asp=1;function size(){var w=innerWidth,h=innerHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();asp=w/h}
+addEventListener('resize',size);size();
+
+var tME=mkTex(256,TX.mem),tDE=mkTex(256,TX.derm,6),qI=new T.Quaternion(),GT=grp();
+/* ---------- hex sheet of cells ---------- */
+var S=.64,HR=9,cp0=[],ix={},NC=0,q,r,j;
+for(q=-HR;q<=HR;q++)for(r=-HR;r<=HR;r++){if(Math.abs(q+r)>HR)continue;ix[q+','+r]=NC;cp0.push([S*(q+r/2),S*.8660254*r,q,r]);NC++}
+var DIR=[[1,0],[-1,0],[0,1],[0,-1],[1,-1],[-1,1]],NB=[],d0=[],vm=new Float32Array(NC),vn2=new Float32Array(NC),dead=[],sy=[],lp=[];
+for(i=0;i<NC;i++){var nb=[];DIR.forEach(function(d){var id=ix[(cp0[i][2]+d[0])+','+(cp0[i][3]+d[1])];if(id!==undefined)nb.push(id)});NB.push(nb);d0.push(Math.sqrt(cp0[i][0]*cp0[i][0]+cp0[i][1]*cp0[i][1]));vm[i]=.18;dead.push(false);sy.push(1);nb.forEach(function(k2){if(k2>i)lp.push(cp0[i][0],.25,cp0[i][1],cp0[k2][0],.25,cp0[k2][1])})}
+var hg=new T.CylinderGeometry(.37,.37,.24,6);hg.translate(0,.12,0);
+var cells=new T.InstancedMesh(hg,new T.MeshStandardMaterial({roughness:.4,bumpMap:tME[1],bumpScale:1.2}),NC),mxx=new T.Matrix4(),cc=new T.Color();
+GT.add(cells);tag(cells,'Cell','Each hexagon is one cell. Its color is its resting voltage, Vmem. Tap to depolarize it.');
+var lg=new T.BufferGeometry();lg.setAttribute('position',new T.Float32BufferAttribute(lp,3));var lm=new T.LineBasicMaterial({color:0xFFF4E6,transparent:true,opacity:.55});GT.add(new T.LineSegments(lg,lm));
+var slab=new T.Mesh(new T.CylinderGeometry(6.2,6.3,.3,6),TM(tDE,1,2,1));slab.rotation.y=Math.PI/2;slab.position.y=-.15;GT.add(slab);tag(slab,'Tissue base','The layer the cells sit on.');
+var bed=new T.Mesh(new T.CircleGeometry(1.7,40),M(0x7A2A2A));bed.rotation.x=-Math.PI/2;bed.position.y=.01;GT.add(bed);tag(bed,'Wound bed','Where cells were lost.');
+function ramp(v0,c){var v=Math.min(1,Math.max(0,.18+(v0-.18)*2.4)),a,b,k;if(v<.5){a=[.12,.14,.18];b=[.71,.37,.27];k=v/.5}else{a=[.71,.37,.27];b=[1,.78,.35];k=(v-.5)/.5}c.setRGB(a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k,a[2]+(b[2]-a[2])*k)}
+var clampT=new Float32Array(NC),NOW=0,cpS=document.getElementById('cp'),kbC=document.getElementById('kb'),ctl=document.getElementById('ctl'),userKB=false,kbT=0,lastP=0;
+kbC.addEventListener('change',function(){userKB=true});
+cv.addEventListener('pointerup',function(e){if(moved<6){var h=pick(e);if(h&&h.object===cells&&h.instanceId!=null&&!dead[h.instanceId])clampT[h.instanceId]=performance.now()/1000+1.6}});
+function stepSim(coup,kb,wT){var i2,j2,nbr,lap,rest=.18+.42*kb,dv;for(i2=0;i2<NC;i2++)if(clampT[i2]>NOW)vm[i2]=1;for(i2=0;i2<NC;i2++){if(dead[i2]){vn2[i2]=0;continue}nbr=NB[i2];lap=0;var edge=false;for(j2=0;j2<nbr.length;j2++){if(dead[nbr[j2]])edge=true;else lap+=vm[nbr[j2]]-vm[i2]}dv=.35*coup*lap*.05-.08*(vm[i2]-rest)*.05;if(edge&&wT>.1)dv+=2.2*wT*.05;vn2[i2]=Math.min(1,Math.max(0,vm[i2]+dv))}var tmp;for(i2=0;i2<NC;i2++)vm[i2]=vn2[i2]}
+/* ---------- labels ---------- */
+LB('A sheet of cells (epithelium)',GT,V(-3.4,.3,-1.2),-1,.9);LB('Color = Vmem: dark polarized, orange depolarized',GT,V(2.2,.3,-1.6),.3,1.6,'ing');
+LB('Gap junction pores (Cx43, Gja1) link neighbors',GT,V(2.6,.3,1.2),1.7,3,'ing');
+LB('Wound: cells lost',GT,V(0,.3,0),3.1,4.9);LB('Wound edge cells depolarize',GT,V(1.9,.3,0),3.4,4.9,'ing');
+LB('K\u207A channels blocked: whole sheet depolarizes',GT,V(0,.3,-3.4),4.1,5.2,'ing');
+LB('Teaching model, not the BETSE output',GT,V(0,.3,3.2),4.9,6,'ing');
+var K=[[0,7.6,8.2,0,0,0],[0,6.2,5.8,0,0,0],[2,5.4,5,1,0,0],[0,6.4,6,0,0,0],[0,5.4,5.4,0,0,0],[0,7.2,7.6,0,0,0],[0,8.2,9.2,0,0,0]];
+/* ---------- interaction: drag to rotate, hover/tap to identify ---------- */
+var yaw=0,pit=0,yT=0,pT=0,drag=false,lx=0,ly=0,moved=0,idleAt=0,rc=new T.Raycaster(),mv=new T.Vector2(),tip=document.getElementById('tip'),hint=document.getElementById('hint'),hov=null,hovC=0,tipT;
+function isVis(o){while(o){if(!o.visible)return false;o=o.parent}return true}
+function pick(e){mv.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);rc.setFromCamera(mv,cam);
+ var hb=rc.intersectObjects(back,false).filter(function(h){return isVis(h.object)}),lim=1e9,q;
+ for(q=0;q<hb.length;q++)if(hb[q].object.material.opacity>=.9){lim=hb[q].distance;break}
+ var hp=rc.intersectObjects(prio,false).filter(function(h){return isVis(h.object)});
+ if(hp.length&&hp[0].distance<lim)return hp[0];return hb.length?hb[0]:null}
+function setHov(o){if(hov===o)return;if(hov&&hov.material&&hov.material.emissive)hov.material.emissive.setHex(hovC);hov=o;if(o&&o.material&&o.material.emissive){hovC=o.material.emissive.getHex();o.material.emissive.setHex(0x6A3A1A)}}
+function show(h,e){var o=h.object,inf=o.userData.info;if(!inf)return;if(o.userData.scar){var p=skin.worldToLocal(h.point.clone());if(Math.hypot(p.x,p.z)<1)inf=['Atrophic scar','A sunken scar: collagen is lost from the dermis, so the surface dips and the ridges between epidermis and dermis flatten.']}
+ tip.innerHTML='<b>'+inf[0]+'</b>'+inf[1];tip.style.opacity=1;tip.style.transform='translate('+Math.max(8,Math.min(e.clientX+16,innerWidth-250))+'px,'+Math.max(8,Math.min(e.clientY+16,innerHeight-120))+'px)'}
+function hide(){tip.style.opacity=0;setHov(null)}
+cv.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;ly=e.clientY;moved=0;cv.style.cursor='grabbing';try{cv.setPointerCapture(e.pointerId)}catch(x){}});
+cv.addEventListener('pointermove',function(e){if(drag){var dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;moved+=Math.abs(dx)+Math.abs(dy);yT+=dx*.008;if(e.pointerType!=='touch')pT=Math.max(-.6,Math.min(.6,pT+dy*.006));hint.style.opacity=0;hide()}else if(e.pointerType!=='touch'){var h=pick(e);if(h){setHov(h.object);show(h,e);cv.style.cursor='pointer'}else{hide();cv.style.cursor='grab'}}});
+cv.addEventListener('pointerup',function(e){drag=false;idleAt=performance.now();cv.style.cursor='grab';if(moved<6){var h=pick(e);if(h){setHov(h.object);show(h,e);clearTimeout(tipT);tipT=setTimeout(hide,3200)}}});
+cv.addEventListener('pointercancel',function(){drag=false;idleAt=performance.now()});
+cv.addEventListener('pointerleave',function(){if(!drag)hide()});
+
+var t=0,clk=new T.Clock(),p3=V(0,0,0),l3=V(0,0,0);
+function fr0(){
+ var time=rm?0:clk.getElapsedTime(),st=Math.min(6,scrollY/innerHeight),now=performance.now();t+=(st-t)*(rm?1:.12);
+ if(!drag&&now-idleAt>3500){yT+=(0-yT)*.02;pT+=(0-pT)*.02}
+ yaw+=(yT-yaw)*.15;pit+=(pT-pit)*.15;W.rotation.y=yaw+Math.sin(time*.25)*.07;W.rotation.x=pit;
+ var i0=Math.min(5,Math.floor(t)),f=ez(Math.min(1,t-i0)),a=K[i0],b=K[i0+1],kz=asp<.85?1.55:1;
+ l3.set(a[3]+(b[3]-a[3])*f,a[4]+(b[4]-a[4])*f,a[5]+(b[5]-a[5])*f);
+ p3.set(a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f).sub(l3).multiplyScalar(kz).add(l3);
+ cam.position.copy(p3);cam.position.x+=Math.sin(time*.3)*.1;cam.position.y+=Math.cos(time*.25)*.06;cam.lookAt(l3);
+
+ NOW=performance.now()/1000;var wT=ez(sg(t,3,3.6)),kbT2=(userKB?!!kbC.checked:t>4.1)?1:0,coup=parseFloat(cpS.value)||.8;kbT+=(kbT2-kbT)*.05;
+ if(!rm&&time-lastP>2.6&&t>.4&&t<3.4){lastP=time;var ri=Math.floor(Math.random()*NC);if(!dead[ri])clampT[ri]=performance.now()/1000+1.6}
+ for(i=0;i<NC;i++){var dn=d0[i]/1.55,sv=dn<1?1-Math.min(1,Math.max(0,wT*1.5-dn*.5)):1;sy[i]=Math.max(sv,.02);dead[i]=sv<.3}
+ stepSim(coup,kbT,wT);stepSim(coup,kbT,wT);
+ for(i=0;i<NC;i++){mxx.compose(V(cp0[i][0],0,cp0[i][1]),qI,V(.93,sy[i],.93));cells.setMatrixAt(i,mxx);ramp(vm[i],cc);cells.setColorAt(i,cc)}
+ cells.instanceMatrix.needsUpdate=true;cells.instanceColor.needsUpdate=true;
+ bed.visible=wT>.05;bed.scale.setScalar(Math.max(wT,.01));lm.opacity=.55*(1-.7*wT);
+ ctl.className=(t>1.4&&t<4.9)?'ctl on':'ctl';
+
+ ren.render(sc,cam);
+ var Wd=innerWidth,H=innerHeight;
+ labs.forEach(function(l){var o=ez(Math.min(sg(t,l.a,l.a+.25),1-sg(t,l.b-.25,l.b)));if(o<=.01||!l.g.visible){l.e.style.opacity=0;return}vv.copy(l.p);l.g.localToWorld(vv);vv.project(cam);if(vv.z>1){l.e.style.opacity=0;return}l.e.style.opacity=o;l.e.style.transform='translate('+((vv.x*.5+.5)*Wd)+'px,'+((-vv.y*.5+.5)*H)+'px) translate(-50%,-100%) translateY(-12px)'});
+ requestAnimationFrame(fr)}
+function fr(){try{fr0()}catch(e){window.__err=1;var h=document.getElementById('hint');h.textContent='3D error: '+e.message;h.style.opacity=1}}
+fr();
+setTimeout(function(){if(!window.__err)hint.style.opacity=0},9000);
+})();
+</script>
+</body>
+</html>

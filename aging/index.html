@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aging | Muneeb Shahzad</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🧬%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6DFCB;--ink:#2E333D;--soft:#444B58;--terra:#A9482F;--card:#FFFBF5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 30%,#FFF7EC 0%,#F6DFCB 75%) fixed,#F6DFCB;color:var(--ink);font-family:'Fredoka',ui-rounded,'Trebuchet MS',system-ui,sans-serif;line-height:1.6}
+#c{position:fixed;inset:0;width:100%;height:100%;z-index:0;touch-action:pan-y;cursor:grab}
+.back,.hint{position:fixed;z-index:6;background:var(--card);color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:6px 16px;font-size:.9rem}
+.back{top:calc(env(safe-area-inset-top,0px) + 12px);left:14px;text-decoration:none}
+.hint{top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;font-size:.85rem;pointer-events:none;transition:opacity .8s;max-width:60vw}
+main{position:relative;z-index:1;pointer-events:none}
+.step{min-height:100vh;display:flex;align-items:center;padding:70px 5vw}
+.step.r{justify-content:flex-end}
+.card{pointer-events:auto;max-width:420px;background:var(--card);border:2px solid var(--ink);border-radius:38px 20px 42px 20px;padding:22px 24px;box-shadow:6px 6px 0 rgba(169,72,47,.28);opacity:0;transform:translateY(34px) rotate(1deg);transition:opacity .7s,transform .7s}
+.card.in{opacity:1;transform:none}
+.card.hero{background:linear-gradient(90deg,rgba(255,247,236,.96),rgba(255,247,236,.75) 70%,rgba(255,247,236,0));border:0;box-shadow:none;padding:20px 28px 20px 8px;max-width:620px}
+h1{font-size:clamp(3.4rem,14vw,8rem);line-height:.95;margin:0 0 10px;font-weight:600;letter-spacing:-.02em;color:var(--terra)}
+h2{font-size:1.6rem;line-height:1.15;margin:0 0 8px;font-weight:600;color:var(--ink)}
+p{margin:0 0 10px;color:var(--soft)}
+.tag{font-family:'Caveat',cursive;font-size:1.4rem;color:var(--terra)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.chip{border:1.5px solid var(--terra);border-radius:999px;padding:2px 12px;font-size:.88rem;background:rgba(169,72,47,.1);color:var(--ink)}
+.oops{border-left:5px solid var(--terra);padding-left:12px;margin-top:12px}
+.tiles{display:grid;gap:12px;margin-top:8px}
+.tile{border:1.5px solid var(--ink);border-radius:24px 14px 26px 14px;padding:10px 16px;background:rgba(169,72,47,.09)}
+.tile b{display:block;font-size:2.1rem;line-height:1.1;color:var(--terra)}
+.tile span{font-size:.92rem;color:var(--soft)}
+a.lnk{color:var(--terra);font-weight:500}
+.lab{position:fixed;left:0;top:0;z-index:4;max-width:170px;text-align:center;font-size:.82rem;line-height:1.25;background:#FFFBF5;color:#2E333D;border:1.5px solid #2E333D;border-radius:10px;padding:2px 8px;pointer-events:none;opacity:0;will-change:transform}
+.lab::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:12px;background:#2E333D}
+.lab.ing{border:2px solid var(--terra);background:#FFE3CC;font-weight:500}
+.tip{position:fixed;left:0;top:0;z-index:7;max-width:240px;background:#FFFBF5;color:var(--ink);border:1.5px solid var(--terra);border-radius:14px;padding:8px 12px;font-size:.85rem;line-height:1.35;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:3px 3px 0 rgba(169,72,47,.25)}
+.tip b{display:block;color:var(--terra);font-size:.95rem}
+:focus-visible{outline:3px solid var(--terra);outline-offset:3px;border-radius:8px}
+@media (max-width:760px){.step,.step.r{justify-content:center;align-items:flex-end;padding-bottom:7vh}.card{max-width:100%}.lab.minor{display:none}.hint{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);right:auto;left:50%;transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.card{transition:none;transform:none}}
+</style>
+</head>
+<body>
+<a class="back" href="../index.html">Muneeb's site</a>
+<div class="hint" id="hint">Drag to rotate. Hover or tap any part.</div>
+<div class="tip" id="tip"></div>
+<canvas id="c" aria-label="Interactive 3D model of a cell, DNA, the NAD+ pathway and tissues. Drag to rotate, hover or tap parts to learn what they are."></canvas>
+<main>
+<section class="step"><div class="card hero in"><h1>Aging</h1><p>An independent computational project. I suspect aging, more than damage, is what stops mammals from regenerating. This asks whether the nucleus and the mitochondria drifting out of balance turns the regeneration program down. Scroll to go inside the cell. Drag the model, hover any part.</p><span class="tag">does aging switch off regeneration?</span></div></section>
+
+<section class="step r"><div class="card"><span class="tag">two genomes, one machine</span><h2>Mitochondria are built from two sets of DNA</h2><p>Each mitochondrion carries its own tiny genome, which encodes just 13 proteins. Nuclear genes encode the rest, so the nucleus and the mitochondria have to stay in step.</p><p>Orange dots: proteins sent in from the nucleus. Charcoal dots: signals reporting back.</p></div></section>
+
+<section class="step"><div class="card"><span class="tag">when the balance slips</span><h2>Mitonuclear imbalance</h2><p>The idea: with age the two sides drift apart. Mitochondria fragment and dim, and the conversation between nucleus and mitochondria falls out of sync. Watch the flow stutter. This scene is a schematic.</p></div></section>
+
+<section class="step r"><div class="card"><span class="tag">the regeneration program</span><h2>A gene signature that fades</h2><p>I tracked a regeneration gene signature in human tissue and asked how it relates to mitonuclear imbalance. In brain, liver and heart, the more imbalance, the lower the signature.</p></div></section>
+
+<section class="step"><div class="card"><span class="tag">a druggable chokepoint</span><h2>NAMPT controls the NAD+ supply</h2><p>NAD+ fuels mitochondria and the sirtuin enzymes. Cells make it by recycling nicotinamide, and NAMPT is the rate-limiting step. My analysis flags NAMPT as a druggable chokepoint gene, and points to nicotinamide and NMN, which feed the same pathway.</p><p>As the gate narrows, precursors pile up and less NAD+ reaches the mitochondria.</p></div></section>
+
+<section class="step r"><div class="card"><span class="tag">five tissues, no single answer</span><h2>The effect depends on the tissue</h2><p>I used GTEx data (via recount3) across five human tissues. The effect is tissue-specific: suppressive in brain, liver and heart, and reversed in skin. Four of the five are shown here.</p></div></section>
+
+<section class="step"><div class="card"><span class="tag">the honest part</span><h2>What this does not show</h2><p>This is a computational analysis of public bulk-tissue data. It shows association, not cause. Nothing here was tested in cells or animals, and the 3D scenes are schematic illustrations, not microscope images.</p><p><a class="lnk" href="https://github.com/muneeb-dotcom" target="_blank" rel="noopener">More of my work on GitHub</a></p></div></section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+
+(function(){
+var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.num').forEach(count)}})},{threshold:.3});
+document.querySelectorAll('.card').forEach(function(c){io.observe(c)});
+function count(n){if(n.dataset.done)return;n.dataset.done=1;var to=+n.dataset.to,d=+n.dataset.dec,s=performance.now();(function f(now){var p=rm?1:Math.min(1,(now-s)/1400);n.textContent=(to*(1-Math.pow(1-p,3))).toFixed(d);if(p<1)requestAnimationFrame(f)})(s)}
+var T=window.THREE,cv=document.getElementById('c'),ren;
+addEventListener('error',function(e){if(/ResizeObserver|Script error/.test(e.message))return;window.__err=1;var h=document.getElementById('hint');h.textContent='3D error: '+e.message;h.style.opacity=1});try{ren=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true})}catch(e){cv.style.display='none';var h0=document.getElementById('hint');h0.textContent='3D could not start here ('+e.message+')';h0.style.opacity=1;window.__err=1;return}
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+var sc=new T.Scene(),cam=new T.PerspectiveCamera(45,1,.1,100),i,k;
+sc.add(new T.AmbientLight(0xFFF1E0,.35));sc.add(new T.HemisphereLight(0xFFF6EA,0x8A5A48,.4));
+var dl=new T.DirectionalLight(0xFFF0DD,.9);dl.position.set(-3,6,7);sc.add(dl);var dl2=new T.DirectionalLight(0xFFE0C4,.35);dl2.position.set(5,3,6);sc.add(dl2);
+var pl=new T.PointLight(0xE8A76B,1.3,18);pl.position.set(3,2,5);sc.add(pl);var rim=new T.PointLight(0xB35E46,1.1,16);rim.position.set(-4,-2,-4);sc.add(rim);
+var dpa=new Float32Array(960);for(i=0;i<960;i++)dpa[i]=(Math.random()-.5)*18;var dgm=new T.BufferGeometry();dgm.setAttribute('position',new T.BufferAttribute(dpa,3));var dust=new T.Points(dgm,new T.PointsMaterial({color:0xE8C9B0,size:.035,transparent:true,opacity:.35}));
+var W=new T.Group();sc.add(W);
+function M(c,o){o=o==null?1:o;return new T.MeshStandardMaterial({color:c,roughness:.6,transparent:o<1,opacity:o})}
+function sg(t,a,b){return Math.min(1,Math.max(0,(t-a)/(b-a)))}function ez(x){return x*x*(3-2*x)}function R(a,b){return a+Math.random()*(b-a)}
+function V(x,y,z){return new T.Vector3(x,y,z)}
+var prio=[],back=[];
+function tag(o,n,d,arr){o.traverse(function(m){if(m.isMesh){m.userData.info=[n,d];(arr||prio).push(m)}})}
+/* ---------- procedural tissue textures (tileable, pure pixel math) ---------- */
+function Hh(i,j,s){var h=Math.imul(i|0,374761393)+Math.imul(j|0,668265263)+Math.imul((s|0)+1,1274126177);h=Math.imul(h^(h>>>13),1274126177);h^=h>>>16;return (h>>>0)/4294967296}
+function vn(x,y,P,s){var xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf),x0=((xi%P)+P)%P,y0=((yi%P)+P)%P,x1=(x0+1)%P,y1=(y0+1)%P,a=Hh(x0,y0,s),b=Hh(x1,y0,s),c=Hh(x0,y1,s),d=Hh(x1,y1,s);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v}
+function fbm(u,v,o,P,s){var a=0,w=.5,f=P,k;for(k=0;k<o;k++){a+=w*vn(u*f,v*f,f,s+k);f*=2;w*=.5}return a/(1-Math.pow(.5,o))*.5+ .0}
+function vor(u,v,N,s){var x=u*N,y=v*N,xi=Math.floor(x),yi=Math.floor(y),d1=9,d2=9,id=0,a,b;for(a=-1;a<=1;a++)for(b=-1;b<=1;b++){var cx=xi+a,cy=yi+b,hx=((cx%N)+N)%N,hy=((cy%N)+N)%N,px=cx+Hh(hx,hy,s)*.8+.1,py=cy+Hh(hx,hy,s+9)*.8+.1,d=Math.sqrt((px-x)*(px-x)+(py-y)*(py-y));if(d<d1){d2=d1;d1=d;id=Hh(hx,hy,s+3)}else if(d<d2)d2=d}return [d1,d2,id]}
+function sst(a,b,x){var t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t)}
+function mx3(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t]}
+function sc3(c,k,h){return [c[0]*k,c[1]*k,c[2]*k,h]}
+var TX={
+skin:function(u,v){var w=fbm(u,v,3,4,1)*2,f1=Math.abs(Math.sin(Math.PI*(u*6+v*4+w*1.2))),f2=Math.abs(Math.sin(Math.PI*(u*4-v*6+w*1.2+.3))),f3=Math.abs(Math.sin(Math.PI*(u*14+v*9+w*2))),f4=Math.abs(Math.sin(Math.PI*(u*9-v*14+w*2+.5))),fur=Math.max(Math.pow(1-f1,16),Math.pow(1-f2,16),.45*Math.max(Math.pow(1-f3,22),Math.pow(1-f4,22))),g=fbm(u,v,4,8,5)*2,pr=vor(u,v,14,7),pore=(pr[2]>.55&&pr[0]<.1)?1-pr[0]/.1:0,h=1-fur*.8+(g-.5)*.35-pore*.8,c=mx3([112,62,52],[190,130,104],sst(.05,.95,h)),bl=fbm(u,v,2,3,9)*2;c[0]+=bl*22;c[1]-=bl*6;return sc3(c,.82+.18*h,h)},
+epi:function(u,v){var c=vor(u,v,16,2),ed=1-sst(0,.1,c[1]-c[0]),nu=sst(.2,.12,c[0]),g=fbm(u,v,3,6,4)*2,b=mx3([214,128,126],[190,96,108],c[2]);b=mx3(b,[104,46,92],nu*.85);b=mx3(b,[138,62,82],ed*.7);return sc3(b,.82+.3*g,1-ed*.6)},
+basal:function(u,v){var c=vor(u,v,34,5),ed=1-sst(0,.08,c[1]-c[0]),nu=sst(.34,.18,c[0]),b=mx3([160,74,92],[60,22,66],nu);b=mx3(b,[110,44,66],ed*.6);return sc3(b,1,1-ed*.5)},
+derm:function(u,v,S){var w=fbm(u,v,3,4,2)*2,w2=fbm(u,v,3,8,6)*2,f1=sst(.55,.92,Math.abs(Math.sin(Math.PI*(v*S+w*2.6)))),f2=.6*sst(.6,.94,Math.abs(Math.sin(Math.PI*(u*S*.8+v*S*.5+w2*2)))),f3=.55*sst(.72,.95,Math.abs(Math.sin(Math.PI*(v*S*3+w*3+u*S*.4)))),f=Math.max(f1,f2,f3),gr=fbm(u,v,4,24,8)*2,c=mx3([176,76,88],[232,150,148],f*.85);return sc3(c,.8+.35*gr,f)},
+fat:function(u,v){var c=vor(u,v,8,3),ed=1-sst(0,.07,c[1]-c[0]),t=sst(0,.5,c[0]),b=mx3([252,228,150],[232,186,92],t);b=mx3(b,[188,112,64],ed);return sc3(b,.92+.1*fbm(u,v,3,8,2),1-ed*.7)},
+cyto:function(u,v){var g=fbm(u,v,5,16,3)*2,d=vor(u,v,26,7),dot=sst(.07,.03,d[0]),c=mx3([222,160,136],[170,96,104],dot*.8);return sc3(c,(.78+.4*g)*(.85+.3*fbm(u,v,3,48,9)*2),g-dot*.4)},
+chrom:function(u,v){var g=fbm(u,v,5,8,11)*2,cl=sst(.42,.68,g),sp=fbm(u,v,3,32,4)*2,c=mx3([156,104,168],[58,28,80],cl);return sc3(c,.85+.3*sp,g)},
+mito:function(u,v){var s=Math.abs(Math.sin(Math.PI*(u*10+fbm(u,v,2,4,5)*3))),cr=sst(.45,.9,s),c=mx3([178,54,44],[104,20,26],cr*.85);return sc3(c,.9+.2*fbm(u,v,3,8,2)*2,1-cr*.5)},
+er:function(u,v){var d=vor(u,v,22,4),r=sst(.09,.04,d[0]),g=fbm(u,v,3,8,6)*2,c=mx3([196,88,72],[96,40,52],r);return sc3(c,.85+.25*g,1-r*.5)},
+mem:function(u,v){var g=fbm(u,v,4,10,7)*2;return sc3([226,150,128],(.8+.4*g)*(.85+.3*fbm(u,v,3,48,5)*2),g)}
+};
+
+function mkTex(w,fn,a1){var c=document.createElement('canvas'),c2=document.createElement('canvas');c.width=c.height=c2.width=c2.height=w;var x=c.getContext('2d'),x2=c2.getContext('2d'),im=x.createImageData(w,w),im2=x2.createImageData(w,w),i,j,k,r,h;for(j=0;j<w;j++)for(i=0;i<w;i++){r=fn(i/w,j/w,a1);k=(j*w+i)*4;im.data[k]=r[0];im.data[k+1]=r[1];im.data[k+2]=r[2];im.data[k+3]=255;h=Math.max(0,Math.min(255,r[3]*255));im2.data[k]=im2.data[k+1]=im2.data[k+2]=h;im2.data[k+3]=255}x.putImageData(im,0,0);x2.putImageData(im2,0,0);var t1=new T.CanvasTexture(c),t2=new T.CanvasTexture(c2);[t1,t2].forEach(function(t){t.wrapS=t.wrapT=T.RepeatWrapping;t.anisotropy=4});return [t1,t2]}
+function TM(p,o,rep,bs){var a=p[0].clone(),b=p[1].clone();a.needsUpdate=b.needsUpdate=true;a.repeat.set(rep,rep);b.repeat.set(rep,rep);return new T.MeshStandardMaterial({color:0xFFFFFF,map:a,bumpMap:b,bumpScale:bs,roughness:.62,transparent:o<1,opacity:o})}
+
+TX.heart=function(u,v){var w=fbm(u,v,3,4,3)*2,row=v*10+(w-.5)*.6,rf=row-Math.floor(row),rid=Math.floor(row),fb=sst(.04,.2,rf)*sst(.04,.2,1-rf),st=.5+.5*Math.sin(2*Math.PI*u*48+rid*2.1),dsc=sst(.93,.99,Math.abs(Math.sin(Math.PI*(u*6+Hh(((rid%10)+10)%10,0,4)*2)))),c=mx3([236,186,184],[198,80,96],fb);c=mx3(c,[160,48,72],st*.35*fb);c=mx3(c,[110,30,60],dsc*.7*fb);var nu=vor(u,v,10,6);c=mx3(c,[100,44,112],sst(.12,.06,nu[0])*.8*fb);return sc3(c,.85+.25*fbm(u,v,3,16,2)*2,fb*(.6+.4*st))};
+TX.liver=function(u,v){var c=vor(u,v,20,8),ed=1-sst(0,.09,c[1]-c[0]),nu=sst(.2,.12,c[0]),g=fbm(u,v,4,12,5)*2,b=mx3([218,128,116],[196,104,102],c[2]);b=mx3(b,[246,222,214],ed*.8);b=mx3(b,[102,46,104],nu*.85);var dx=u-.5,dy=v-.5,r=Math.sqrt(dx*dx+dy*dy),cv=sst(.1,.085,r),rim=sst(.12,.1,r)-cv;b=mx3(b,[250,236,230],cv);b=mx3(b,[120,40,60],rim*.8);return sc3(b,.85+.3*g,1-ed*.5)};
+TX.brain=function(u,v){var g=fbm(u,v,5,12,6)*2,ln=1-sst(0,.06,Math.abs(fbm(u,v,3,6,9)*2-.5)),c=mx3([222,196,206],[200,166,184],g);c=mx3(c,[160,126,170],ln*.5);var s=vor(u,v,9,2),soma=(s[2]>.5)?sst(.09,.04,s[0]):0;c=mx3(c,[84,46,120],soma*.9);return sc3(c,.85+.25*fbm(u,v,3,40,1)*2,g)};
+var tCH=mkTex(256,TX.chrom),tMI=mkTex(256,TX.mito),tCY=mkTex(256,TX.cyto),tME=mkTex(256,TX.mem),tHE=mkTex(256,TX.heart),tLI=mkTex(256,TX.liver),tBR=mkTex(256,TX.brain),tEP=mkTex(256,TX.epi),tSK=mkTex(256,TX.skin);
+/* ---------- CELL: nucleus + mitochondria ---------- */
+var cell=new T.Group();W.add(cell);
+var mem=new T.Mesh(new T.SphereGeometry(1,40,28),TM(tME,.3,1.5,.5));mem.scale.set(3.1,2,1.7);mem.material.side=T.DoubleSide;mem.material.depthWrite=false;cell.add(mem);tag(mem,'Cell membrane','The cell\'s outer boundary.',back);
+var mo=new T.Mesh(new T.SphereGeometry(1,40,28),(function(){var m=TM(tCY,1,2.5,.9);m.side=T.BackSide;return m})());mo.scale.set(3.14,2.04,1.74);cell.add(mo);
+var NU=V(-1.5,.2,0),nuc=new T.Mesh(new T.SphereGeometry(.95,32,24),TM(tCH,.96,1,1.4));nuc.position.copy(NU);cell.add(nuc);tag(nuc,'Nucleus','Holds the nuclear DNA, which encodes most mitochondrial proteins.');
+var PORE=V(-.57,.27,.1),pore=new T.Mesh(new T.TorusGeometry(.1,.027,8,16),M(0xFFF4E6));pore.position.copy(PORE);pore.lookAt(V(10,0,0));cell.add(pore);tag(pore,'Nuclear pore','Gateway between the nucleus and the rest of the cell.');
+var MP=[[.9,1.2,.2],[1.9,.9,-.3],[2.3,.1,.3],[1.4,-.2,-.4],[.6,-.9,.3],[1.8,-1.1,-.2],[2.6,-.8,.1]],mitos=[],pa=[],pr=[],cvs=[];
+MP.forEach(function(p,n){var g=new T.Group(),mat=TM(tMI,.85,1,.8),m=new T.Mesh(new T.SphereGeometry(.28,24,16),mat);m.scale.set(2.2,.75,.75);g.add(m);var dn=new T.Mesh(new T.TorusGeometry(.1,.022,8,18),new T.MeshStandardMaterial({color:0xFFF4E6,emissive:0xFFD9B0,emissiveIntensity:.5}));dn.rotation.y=1.2;g.add(dn);g.position.set(p[0],p[1],p[2]);g.rotation.z=(n%3-1)*.5;cell.add(g);
+ tag(m,'Mitochondrion','The cell\'s power plant. Its proteins come from two genomes.');tag(dn,'mtDNA','Mitochondria carry their own small genome. It encodes 13 proteins; nuclear genes encode the rest.');mitos.push({g:g,m:m,mat:mat,base:V(p[0],p[1],p[2]),n:n});
+ cvs.push(new T.CatmullRomCurve3([PORE,V((PORE.x+p[0])/2,(PORE.y+p[1])/2+(n%2?.5:-.5),p[2]/2),V(p[0]-.5,p[1],p[2])]));
+ var a=new T.Mesh(new T.SphereGeometry(.06,10,8),new T.MeshBasicMaterial({color:0xF08A1C}));cell.add(a);tag(a,'Nuclear-encoded protein','Made from nuclear genes, then imported into the mitochondrion.');pa.push(a);
+ var r=new T.Mesh(new T.SphereGeometry(.05,10,8),new T.MeshBasicMaterial({color:0x2E333D}));cell.add(r);tag(r,'Retrograde signal','Mitochondria report their state back to the nucleus.');pr.push(r)});
+/* ---------- DNA helix with regeneration signature ---------- */
+var dna=new T.Group();W.add(dna);
+var hp1=[],hp2=[],NH=64;for(i=0;i<=NH;i++){var ha=i/NH*Math.PI*6,hx=(i/NH-.5)*7.8;hp1.push(V(hx,Math.cos(ha)*.8,Math.sin(ha)*.8));hp2.push(V(hx,Math.cos(ha+Math.PI)*.8,Math.sin(ha+Math.PI)*.8))}
+var s1=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(hp1),220,.075,8),M(0xB5523A)),s2=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(hp2),220,.075,8),M(0x6E3B48));dna.add(s1,s2);tag(s1,'DNA strand','One strand of the double helix.');tag(s2,'DNA strand','The complementary strand.');
+var sigM=new T.MeshStandardMaterial({color:0xF2A33A,emissive:0xF08A1C,emissiveIntensity:1}),rgM=M(0x8B7B72);
+function rung(p1,p2,mat){var d=V(0,0,0).subVectors(p2,p1),L=d.length(),m=new T.Mesh(new T.CylinderGeometry(.034,.034,1,6),mat);m.position.copy(p1).addScaledVector(d,.5);m.scale.y=L;m.quaternion.setFromUnitVectors(V(0,1,0),d.normalize());dna.add(m);return m}
+for(k=0;k<26;k++){var ix=Math.round(2+k*2.3),sg2=k>=8&&k<18,rm2=rung(hp1[ix],hp2[ix],sg2?sigM:rgM);if(sg2)tag(rm2,'Regeneration signature gene','Part of the gene set the project tracks. Its expression fades as mitonuclear imbalance grows.');else tag(rm2,'Base pair','A rung of the double helix.')}
+/* ---------- NAD+ pathway with the NAMPT chokepoint ---------- */
+var nad=new T.Group();W.add(nad);
+function blob(r,tex){var g=new T.IcosahedronGeometry(r,3),p=g.attributes.position,q,w3=V(0,0,0);for(q=0;q<p.count;q++){w3.fromBufferAttribute(p,q);w3.multiplyScalar(1+.18*Math.sin(w3.x*5+1)*Math.sin(w3.y*4+2)*Math.sin(w3.z*5));p.setXYZ(q,w3.x,w3.y,w3.z)}g.computeVertexNormals();return new T.Mesh(g,TM(tex,1,1.2,.9))}
+var gT=blob(.8,tMI),gB=blob(.8,tMI);nad.add(gT,gB);tag(gT,'NAMPT','The rate-limiting enzyme of NAD+ recycling. The project flags it as a druggable chokepoint.');tag(gB,'NAMPT','The rate-limiting enzyme of NAD+ recycling. The project flags it as a druggable chokepoint.');
+var nmnat=new T.Mesh(new T.TorusGeometry(.5,.2,18,36),TM(tCH,1,1.2,1));nmnat.rotation.y=Math.PI/2;nmnat.position.set(1.7,0,0);nad.add(nmnat);tag(nmnat,'NMNAT','Converts NMN into NAD+.');
+var lane=new T.Mesh(new T.CylinderGeometry(.015,.015,9,6),M(0x8B7B72));lane.rotation.z=Math.PI/2;lane.position.x=-.75;nad.add(lane);
+for(i=0;i<10;i++){var pl2=new T.Mesh(new T.SphereGeometry(.1,10,8),M(0x2E333D));pl2.position.set(-5.2+R(-.35,.35),R(-.5,.5),R(-.4,.4));nad.add(pl2);tag(pl2,'Nicotinamide (NAM)','The raw material that NAMPT recycles into NMN.')}
+var endM=new T.Mesh(new T.SphereGeometry(.5,24,16),TM(tMI,1,1,.8));endM.scale.set(1.8,1,1);endM.position.set(5,0,0);nad.add(endM);tag(endM,'Mitochondrion','Runs on NAD+. Sirtuin enzymes need it too.');endM.material.emissive.setHex(0xE0552E);
+var np=[],NP=16;for(i=0;i<NP;i++){var pm2=new T.Mesh(new T.SphereGeometry(.1,10,8),new T.MeshBasicMaterial({color:0x2E333D}));nad.add(pm2);tag(pm2,'NAD+ precursor','Nicotinamide, then NMN, then NAD+ as it moves along the pathway.');np.push(pm2)}
+/* ---------- tissues ---------- */
+var tis=new T.Group();W.add(tis);
+var TS=[['Brain',tBR,-4.5,-1],['Liver',tLI,-1.5,-1],['Heart',tHE,1.5,-1],['Skin',tEP,4.5,1]],arrows=[];
+TS.forEach(function(d,n){var geo=new T.BoxGeometry(2.2,2.2,2.2),mats=d[0]==='Skin'?[TM(tEP,1,1,.9),TM(tEP,1,1,.9),TM(tSK,1,1,2),TM(tEP,1,1,.9),TM(tEP,1,1,.9),TM(tEP,1,1,.9)]:TM(d[1],1,1,.9),cb=new T.Mesh(geo,mats);cb.position.set(d[2],0,0);cb.add(new T.LineSegments(new T.EdgesGeometry(geo),new T.LineBasicMaterial({color:0x2E333D})));tis.add(cb);
+ tag(cb,d[0],d[0]==='Skin'?'Skin is the exception: the relationship reverses.':'In GTEx '+d[0].toLowerCase()+' samples the regeneration signature is suppressed as mitonuclear imbalance rises.');
+ var ar=new T.Group(),col=d[3]<0?0xA93A28:0xE0A030,st2=new T.Mesh(new T.CylinderGeometry(.08,.08,.9,10),M(col)),hd=new T.Mesh(new T.ConeGeometry(.24,.45,16),M(col));st2.position.y=.45;hd.position.y=1.12;ar.add(st2,hd);if(d[3]<0)ar.rotation.z=Math.PI;ar.position.set(d[2],d[3]<0?2.9:1.55,0);tis.add(ar);arrows.push(ar);tag(ar,d[3]<0?'Suppressed':'Reversed',d[3]<0?'Signature falls as imbalance rises.':'Signature rises as imbalance rises.')});
+/* ---------- labels ---------- */
+var labs=[],vv=V(0,0,0);
+function LB(txt,g,p,a,b,cls){var e=document.createElement('div');e.className='lab '+(cls||'');e.textContent=txt;document.body.appendChild(e);labs.push({e:e,g:g,p:p,a:a,b:b})}
+LB('Nucleus: nuclear genes encode most mitochondrial proteins',cell,V(-1.5,1.2,0),-1,1.4);LB('Mitochondria',cell,V(1.9,1.4,.2),-1,1.4);LB('mtDNA: encodes just 13 proteins',cell,V(2.3,.55,.3),0,1.4,'minor');
+LB('Nuclear-encoded proteins flow in',cell,V(-.2,1,.2),.9,2.4,'ing');LB('Retrograde signals report back',cell,V(-.2,-1.1,0),.9,2.4,'ing');
+LB('Fragmented, dimmer mitochondria',cell,V(1.9,1.4,.2),1.9,2.9);LB('Signals fall out of sync',cell,V(-.2,1,.2),1.9,2.9,'ing');
+LB('Regeneration signature genes',dna,V(0,1.1,0),2.9,3.9,'ing');LB('Signal dims as imbalance grows',dna,V(-3,-1.1,0),3.3,3.9);
+LB('Nicotinamide (NAM)',nad,V(-5.2,.9,0),3.9,5);LB('NAMPT: the rate-limiting gate',nad,V(-1.9,2.2,0),3.9,5);LB('NMN',nad,V(-.3,.5,0),3.9,5);LB('NMNAT',nad,V(1.7,.95,0),3.9,5);LB('NAD+ fuels mitochondria and sirtuins',nad,V(4.8,.9,0),4,5);
+LB('Nicotinamide or NMN supplements feed this pathway',nad,V(-3.2,-.7,0),4.2,5,'ing minor');
+LB('Brain: suppressed',tis,V(-4.5,1.2,0),4.9,6);LB('Liver: suppressed',tis,V(-1.5,1.2,0),4.9,6);LB('Heart: suppressed',tis,V(1.5,1.2,0),4.9,6);LB('Skin: reversed',tis,V(4.5,1.2,0),4.9,6);
+var K=[[0,.5,9,0,0,0],[1.4,.4,6.2,.8,0,0],[1.6,.3,5.6,1.2,0,0],[0,0,7.4,0,0,0],[0,.4,9.8,.2,0,0],[0,1.4,10.6,0,.6,0],[0,1.2,12,0,.3,0]];
+var asp=1;function size(){var w=innerWidth,h=innerHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();asp=w/h}
+addEventListener('resize',size);size();
+/* ---------- interaction: drag to rotate, hover/tap to identify ---------- */
+var yaw=0,pit=0,yT=0,pT=0,drag=false,lx=0,ly=0,moved=0,idleAt=0,rc=new T.Raycaster(),mv=new T.Vector2(),tip=document.getElementById('tip'),hint=document.getElementById('hint'),hov=null,hovC=0,tipT;
+function isVis(o){while(o){if(!o.visible)return false;o=o.parent}return true}
+function pick(e){mv.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);rc.setFromCamera(mv,cam);
+ var hb=rc.intersectObjects(back,false).filter(function(h){return isVis(h.object)}),lim=1e9,q;
+ for(q=0;q<hb.length;q++)if(hb[q].object.material.opacity>=.9){lim=hb[q].distance;break}
+ var hp=rc.intersectObjects(prio,false).filter(function(h){return isVis(h.object)});
+ if(hp.length&&hp[0].distance<lim)return hp[0];return hb.length?hb[0]:null}
+function setHov(o){if(hov===o)return;if(hov&&hov.material&&hov.material.emissive)hov.material.emissive.setHex(hovC);hov=o;if(o&&o.material&&o.material.emissive){hovC=o.material.emissive.getHex();o.material.emissive.setHex(0x6A3A1A)}}
+function show(h,e){var o=h.object,inf=o.userData.info;if(!inf)return;if(o.userData.scar){var p=skin.worldToLocal(h.point.clone());if(Math.hypot(p.x,p.z)<1)inf=['Atrophic scar','A sunken scar: collagen is lost from the dermis, so the surface dips and the ridges between epidermis and dermis flatten.']}
+ tip.innerHTML='<b>'+inf[0]+'</b>'+inf[1];tip.style.opacity=1;tip.style.transform='translate('+Math.max(8,Math.min(e.clientX+16,innerWidth-250))+'px,'+Math.max(8,Math.min(e.clientY+16,innerHeight-120))+'px)'}
+function hide(){tip.style.opacity=0;setHov(null)}
+cv.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;ly=e.clientY;moved=0;cv.style.cursor='grabbing';try{cv.setPointerCapture(e.pointerId)}catch(x){}});
+cv.addEventListener('pointermove',function(e){if(drag){var dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;moved+=Math.abs(dx)+Math.abs(dy);yT+=dx*.008;if(e.pointerType!=='touch')pT=Math.max(-.6,Math.min(.6,pT+dy*.006));hint.style.opacity=0;hide()}else if(e.pointerType!=='touch'){var h=pick(e);if(h){setHov(h.object);show(h,e);cv.style.cursor='pointer'}else{hide();cv.style.cursor='grab'}}});
+cv.addEventListener('pointerup',function(e){drag=false;idleAt=performance.now();cv.style.cursor='grab';if(moved<6){var h=pick(e);if(h){setHov(h.object);show(h,e);clearTimeout(tipT);tipT=setTimeout(hide,3200)}}});
+cv.addEventListener('pointercancel',function(){drag=false;idleAt=performance.now()});
+cv.addEventListener('pointerleave',function(){if(!drag)hide()});
+
+var t=0,clk=new T.Clock(),p3=V(0,0,0),l3=V(0,0,0);
+function fr0(){
+ var time=rm?0:clk.getElapsedTime(),st=Math.min(6,scrollY/innerHeight),now=performance.now();t+=(st-t)*(rm?1:.12);
+ if(!drag&&now-idleAt>3500){yT+=(0-yT)*.02;pT+=(0-pT)*.02}
+ yaw+=(yT-yaw)*.15;pit+=(pT-pit)*.15;W.rotation.y=yaw+Math.sin(time*.25)*.07;W.rotation.x=pit;
+ var i0=Math.min(5,Math.floor(t)),f=ez(Math.min(1,t-i0)),a=K[i0],b=K[i0+1],kz=asp<.85?1.55:1;
+ l3.set(a[3]+(b[3]-a[3])*f,a[4]+(b[4]-a[4])*f,a[5]+(b[5]-a[5])*f);
+ p3.set(a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f).sub(l3).multiplyScalar(kz).add(l3);
+ cam.position.copy(p3);cam.position.x+=Math.sin(time*.3)*.1;cam.position.y+=Math.cos(time*.25)*.06;cam.lookAt(l3);
+ var ag=ez(sg(t,1.5,2.4)),cs=1-ez(sg(t,2.8,3.3)),dsc=ez(sg(t,2.8,3.3))*(1-ez(sg(t,3.7,4.2))),nsc=ez(sg(t,3.7,4.2))*(1-ez(sg(t,4.7,5.2))),tsc=ez(sg(t,4.7,5.2));
+ cell.scale.setScalar(Math.max(cs,.0001));cell.visible=cs>.01;dna.scale.setScalar(Math.max(dsc,.0001));dna.visible=dsc>.01;nad.scale.setScalar(Math.max(nsc,.0001));nad.visible=nsc>.01;tis.scale.setScalar(Math.max(tsc,.0001));tis.visible=tsc>.01;
+ mitos.forEach(function(o){var s=Math.sin(time*2.4+o.n);o.m.scale.set(2.2-1.15*ag,.75+.2*ag,.75+.2*ag);o.mat.color.setRGB(1-.42*ag,1-.5*ag,1-.5*ag);o.g.position.set(o.base.x+Math.sin(time*3+o.n)*.05*ag,o.base.y+Math.cos(time*2.6+o.n)*.05*ag+s*.02,o.base.z)});
+ for(i=0;i<7;i++){var u1=(time*.25*(1-.6*ag)+i/7)%1,u2=1-((time*.2*(1-.75*ag)+i/7+.3)%1),jt=ag*.12;pa[i].position.copy(cvs[i].getPoint(u1));pa[i].position.y+=Math.sin(time*9+i)*jt;pr[i].position.copy(cvs[i].getPoint(u2));pr[i].position.y+=Math.cos(time*7+i)*jt;pr[i].visible=(i%7)/7<1-.55*ag}
+ var dim=ez(sg(t,2.9,3.7));sigM.emissiveIntensity=1-.8*dim;sigM.color.setRGB(1-.3*dim,.64-.2*dim,.23);dna.rotation.x=time*.25;
+ var cl=ez(sg(t,3.8,4.4)),gy=.9+.35*(1-cl);gT.position.set(-1.9,gy,0);gB.position.set(-1.9,-gy,0);nmnat.rotation.x=time*.4;
+ var sent=0;for(i=0;i<NP;i++){var ph=(time*.28+i/NP)%1,x=-5+ph*8.6,pmz=np[i],blk=(i/NP)>(1-.7*cl);if(blk&&x>-1.9-.8)x=-2.7-(i%5)*.2;pmz.position.set(x,Math.sin(time*3+i)*.07,Math.cos(time*2+i)*.07);pmz.material.color.setHex(x<-1.9?0x2E333D:x<1.4?0xF2A33A:0xE0552E);pmz.scale.setScalar(x<-1.9?.8:x<1.4?1.1:1.4);if(!blk||x>1.4)sent++}
+ endM.material.emissiveIntensity=.9*(sent/NP)*(1-.1*cl);
+ arrows.forEach(function(ar,n){var g2=ez(sg(t,5.05+n*.12,5.6+n*.12));ar.scale.setScalar(Math.max(g2,.0001));ar.position.y+=0});
+ tis.children.forEach(function(c,n){if(c.isMesh&&c.geometry.type==='BoxGeometry')c.rotation.y=Math.sin(time*.4+n)*.12});
+ ren.render(sc,cam);
+ var Wd=innerWidth,H=innerHeight;
+ labs.forEach(function(l){var o=ez(Math.min(sg(t,l.a,l.a+.25),1-sg(t,l.b-.25,l.b)));if(o<=.01||!l.g.visible){l.e.style.opacity=0;return}vv.copy(l.p);l.g.localToWorld(vv);vv.project(cam);if(vv.z>1){l.e.style.opacity=0;return}l.e.style.opacity=o;l.e.style.transform='translate('+((vv.x*.5+.5)*Wd)+'px,'+((-vv.y*.5+.5)*H)+'px) translate(-50%,-100%) translateY(-12px)'});
+ requestAnimationFrame(fr)}
+function fr(){try{fr0()}catch(e){window.__err=1;var h=document.getElementById('hint');h.textContent='3D error: '+e.message;h.style.opacity=1}}
+fr();
+setTimeout(function(){if(!window.__err)hint.style.opacity=0},9000);
+})();
+</script>
+</body>
+</html>
