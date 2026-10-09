@@ -4,6 +4,8 @@
 
 Explore the 3D worlds of my research projects: scroll through each one, drag the models, hover over any part and read what I found, including what I didn't. Turn the sound on for the full experience. Sound is opt-in, because browsers block autoplay.
 
+🌐 **Portfolio:** [muneeb-dotcom.github.io](https://muneeb-dotcom.github.io) · explore my research as interactive 3D worlds (turn the sound on for the full experience)
+
 ## The 3D worlds
 
 | World | What it covers | Code |
